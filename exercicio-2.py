@@ -9,24 +9,23 @@ def filtro(lista: list, corte: int) -> list:
     nova_lista = []
     for i in lista:
         try:
-            nova_lista.append(int(i))
+            n = int(i)
+            if n > corte:
+                nova_lista.append(n)
 
-        except ValueError as err:
-            raise ValueError(err)
+        except ValueError:
+            raise ValueError(f"Atenção! O valor {i} não é válido.")
 
-    lista_filtrada = []
-    for n in nova_lista:
-        if n > corte:
-            lista_filtrada.append(n)
+    return nova_lista
 
-    return lista_filtrada
-
-
-entrada = input("Entre com numeros separados por ',': ")
 
 try:
-    resultado = filtro(entrada, 2)
+    entrada = input("Entre com numeros separados por ',': ").split(",")
+
+    corte = int(input("Qual o valor de corte? "))
+
+    resultado = filtro(lista=entrada, corte=corte)
     print(resultado)
 
 except ValueError as err:
-    print({err})
+    print(err)
